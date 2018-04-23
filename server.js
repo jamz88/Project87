@@ -1,4 +1,3 @@
-//const bot = new Eris(process.env.DISCORD_BOT_TOKEN);   // Replace DISCORD_BOT_TOKEN in .env with your bot accounts token
 // Call Packages
 const Discord = require('discord.js');
 const db = require('quick.db');
@@ -15,6 +14,20 @@ var chance = new Chance();
 const client = new Discord.Client();
 // We have to define a moderator role, the name of a role you need to run certain commands
 const modRole = 'Administrator';
+
+//ping
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+//end ping
 
 // JSON Files
 //const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
@@ -577,5 +590,5 @@ const modRole = 'Administrator';
           }
 
 });
-client.login('NDM2NDUzNTIyOTYwMjg1Njk2.DbnusQ.MGzztwhVJYF8Nb4bvqF0X9qdi88');
-//client.login('MjQ0MzkxOTQwMTczNDYzNTUy.DbjsEA.jNycLl6O73J-NeF2ai7-x3j_w94');
+
+client.login(process.env.DISCORD_BOT_TOKEN);
